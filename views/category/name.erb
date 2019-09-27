@@ -1,0 +1,18 @@
+<table>
+  <thead>
+    <tr>
+      <th>Merchant</th>
+      <th>Amount</th>
+      <th>date_time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%@transactions.each do |transaction|%>
+    <tr>
+      <td><%=transaction.merchant_name %></td>
+      <td><%= transaction.amount %></td>
+      <td><%= transaction.transaction_date %></td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>

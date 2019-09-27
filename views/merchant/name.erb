@@ -1,0 +1,7 @@
+<%@transactions.each do |transaction|%>
+<h2><%=transaction.merchant_name%></h2>
+
+<p>Total amount spent on this shop : <%= transaction.amount %> </p>
+<p>Number of vistis : <%= transaction.frequency %> </p>
+
+<% end %>

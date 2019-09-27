@@ -1,0 +1,56 @@
+<form  method="post" action="/spending_tracker/transactions">
+
+
+  <label for="merchants">Merchant :</label>
+  <select id="merchants" name="merchant_id">
+    <%@merchants.each do |merchant|%>
+    <option value=<%=merchant.id %>> <%=merchant.name %></option>
+    <% end %>
+  </select>
+  <label for="categories">Category :</label>
+  <select id="categories" name="category_id">
+    <%@categories.each do |category|%>
+    <option value=<%= category.id %>> <%=category.name %></option>
+    <% end %>
+  </select>
+
+
+  <label for="amount">Amount</label>
+  <input id= "amount" type="number" name="amount" >
+
+  <label for="date">Date</label>
+  <input id= "date" type= "date" name="transaction_date" />
+
+  <input type="submit" value="Add transaction"/>
+</form>
+
+
+<table>
+  <thead>
+    <tr>
+      <th><h3>Transaction date</h3></th>
+      <th><h3>Merchant</h3></th>
+      <th><h3>Category</h3></th>
+
+      <th><h3>Amount</h3></th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <%@transactions.each do |transaction|%>
+    <tr>
+      <td><%= transaction.transaction_date%></td>
+      <td> <%= transaction.merchant_name %></td>
+      <td> <%= transaction.category_name %></td>
+      <td><%= transaction.amount %></td>
+
+      <td><button type="button" name="button"><a href="/spending_tracker/transaction/<%= transaction.id%>/edit" >Edit</a></button></td>
+      <td>
+        <form  method="post" action="/spending_tracker/transaction/<%= transaction.id%>" >
+          <input type="submit" value="Delete"/>
+        </form>
+      </td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>

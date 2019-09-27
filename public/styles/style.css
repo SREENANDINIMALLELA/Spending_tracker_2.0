@@ -1,0 +1,15 @@
+/* .tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+} */
+body {
+  background: black;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  color: red;
+  font-family: 'Merriweather', serif;
+  padding: 0px;
+  margin: 0px;
+}

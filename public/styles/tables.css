@@ -1,0 +1,22 @@
+td, th {
+  text-align:justify;
+}
+
+td {
+  padding: 10px 30px 0px 0px;
+}
+
+thead{
+  text-decoration-color: red;
+}
+th {
+  padding: 10px 10px 10px 10px;
+}
+/* tfoot{
+padding: 0px 20px 10px 0px;
+border-bottom: 15px solid red ;
+}
+
+table {
+border-collapse: collapse;
+}

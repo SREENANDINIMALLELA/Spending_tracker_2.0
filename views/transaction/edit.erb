@@ -1,0 +1,39 @@
+
+<form  method="post" action="/spending_tracker/transaction/<%=@transaction.id%>/edit">
+
+
+  <label for="categories">Category :</label>
+  <select id="categories" name="category_id">
+    <%@categories.each do |category|%>
+    <%if (category.id ==  @transaction.category_id)%>
+    <option selected = 'selected' value = <%=category.id%>> <%=category.name%>
+    </option>
+    <% else %>
+    <option value=<%= category.id %>> <%=category.name %>
+    </option>
+    <% end %>
+    <% end %>
+  </select>
+
+
+
+  <label for="merchants">Merchant :</label>
+  <select id="merchants" name="merchant_id">
+    <%@merchants.each do |merchant|%>
+    <%if (merchant.id ==  @transaction.merchant_id)%>
+    <option selected = 'selected' value = <%=merchant.id%>> <%=merchant.name%>
+    </option>
+    <% else %>
+    <option value = <%=merchant.id%>> <%=merchant.name%>
+    </option>
+    <% end %>
+    <% end %>
+  </select>
+
+
+  <label for="amount">Amount</label>
+  <input id= "amount" type="number" name="amount" value = <%= @transaction.amount %> >
+  <label for="date">Date</label>
+  <input id= "date" type="date" name="transaction_date" value = <%= @transaction.transaction_date %> >
+  <input type="submit" value="update"/>
+</form>

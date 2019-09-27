@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+
+  </style>
+</head>
+<body>
+
+  <h2>search</h2>
+
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by category" title="Type in a name">
+
+  <table id="myTable">
+    <tr class="header">
+      <th style="width:30%;"><h3>Category</h3></th>
+      <th style="width:30%;"><h3>Merchant</h3></th>
+
+      <th style="width:30%;"><h3>Amount</h3></th>
+      <th style="width:40%;"><h3> Transaction Date </h3></th>
+    </tr>
+    <%@transactions.each do |transaction|%>
+    <tr>
+      <td> <%= transaction.category_name %></td>
+      <td> <%= transaction.merchant_name %></td>
+      <td><%= transaction.amount %></td>
+      <td><%= transaction.transaction_date%></td>
+    </tr>
+    <% end %>
+  </table>
+
+  <script>
+    function myFunction() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+  </script>

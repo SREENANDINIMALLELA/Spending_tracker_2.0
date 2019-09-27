@@ -1,0 +1,13 @@
+<form  method="post" action="/spending_tracker/merchant" >
+  <label for="merchant_name">Merchant</label>
+  <input id= "merchant_name" type="text" name="name" />
+  <input type="submit" value="create merchant"/>
+</form>
+<h4>Existing merchants</h4>
+<%@merchants.each do |merchant|%>
+<p><%=merchant.name%> </p>
+
+<form  method="post" action="/spending_tracker/merchant/<%= merchant.id%>" >
+  <input type="submit" value="delete merchant"/>
+</form>
+<%end%>
