@@ -42,5 +42,5 @@ class Merchant
     values = [id]
     SqlRunner.run( sql, values )
   end
-
+  
 end

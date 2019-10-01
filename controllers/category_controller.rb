@@ -22,7 +22,7 @@ end
 post'/spending_tracker/category'do
 category = Category.new(params)
 category.save
-redirect to '/spending_tracker/transactions'
+redirect to '/spending_tracker/category/new'
 end
 
 
@@ -40,6 +40,6 @@ post '/spending_tracker/category/:id' do
     erb(:"category/notdelete")
   elsif(@transaction  == 0)
     Category.delete_by_id(id)
-    erb(:"category/delete")
+    redirect to '/spending_tracker/category/new'
   end
 end

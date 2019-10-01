@@ -27,7 +27,7 @@ end
 post'/spending_tracker/merchant'do
 merchant = Merchant.new(params)
 merchant.save
-redirect to '/spending_tracker/transactions'
+redirect to '/spending_tracker/merchant/new'
 end
 
 post '/spending_tracker/merchant/:id' do
@@ -36,7 +36,8 @@ post '/spending_tracker/merchant/:id' do
   if (@transaction != 0 )
     erb(:"merchant/notdelete")
   elsif(@transaction  == 0)
-    Category.delete_by_id(id)
-    erb(:"merchant/delete")
+    Merchant.find(id)
+    redirect to '/spending_tracker/merchant/new'
   end
+
 end

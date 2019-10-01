@@ -5,7 +5,7 @@
 </form>
 <h4 align = 'center'>Existing merchants</h4>
 <%@merchants.each do |merchant|%>
-<h5 style="text-align:center;" ><%=merchant.name%> </h5>
+<h5 align = 'center' ><%=merchant.name%> </h5>
 
 <form align = 'center' method="post" action="/spending_tracker/merchant/<%= merchant.id%>" >
   <input class = 'delete' type="submit" value="delete merchant"/>
