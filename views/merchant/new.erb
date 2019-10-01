@@ -1,13 +1,13 @@
-<form  method="post" action="/spending_tracker/merchant" >
+<form align = 'center' method="post" action="/spending_tracker/merchant" >
   <label for="merchant_name">Merchant</label>
   <input id= "merchant_name" type="text" name="name" />
-  <input type="submit" value="create merchant"/>
+  <input class= 'submit' type="submit" value="create merchant"/>
 </form>
-<h4>Existing merchants</h4>
+<h4 align = 'center'>Existing merchants</h4>
 <%@merchants.each do |merchant|%>
-<p><%=merchant.name%> </p>
+<h5 style="text-align:center;" ><%=merchant.name%> </h5>
 
-<form  method="post" action="/spending_tracker/merchant/<%= merchant.id%>" >
-  <input type="submit" value="delete merchant"/>
+<form align = 'center' method="post" action="/spending_tracker/merchant/<%= merchant.id%>" >
+  <input class = 'delete' type="submit" value="delete merchant"/>
 </form>
 <%end%>

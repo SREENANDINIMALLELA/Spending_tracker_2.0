@@ -3,8 +3,9 @@
 }
 #myInput {
   background-image: url('/css/searchicon.png');
-  background-position: 10px 10px;
+  background-position: center;
   background-repeat: no-repeat;
+  align-self: center;
   width: 50%;
   font-size: 16px;
   padding: 12px 20px 12px 50px;

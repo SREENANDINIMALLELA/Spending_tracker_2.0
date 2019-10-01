@@ -76,13 +76,26 @@ class Transaction
       return result
     end
 
+
+
+  # Query the database and get transaction-id , category-name , merchant-name ,amount and transaction date by inner joining three table transactions , categories and merchants table and order it by time .
+   # take the result of the sql query  ,  map the transactions and  create a new object of each transaction
     def self.get_all_transactions()
-      sql = "SELECT  transactions.id, categories.name AS category_name , merchants.name as merchant_name , transactions.amount , transactions.transaction_date  from transactions inner join merchants on transactions.merchant_id = merchants.id inner join categories on transactions.category_id =categories.id order by transactions.transaction_date DESC ;"
+      sql = "SELECT  transactions.id, categories.name AS category_name , merchants.name As merchant_name , transactions.amount , transactions.transaction_date
+      FROM transactions
+      INNER JOIN  merchants
+      ON  transactions.merchant_id = merchants.id
+      INNER JOIN  categories
+       ON transactions.category_id =categories.id
+       ORDER BY transactions.transaction_date DESC ;"
 
       results = SqlRunner.run( sql )
       result = results.map { |transaction| TransactionDto.new( transaction ) }
       return result
     end
+
+
+
 
     def self.delete_all()
       sql = "DELETE FROM transactions"
@@ -102,24 +115,46 @@ class Transaction
       return result.first()
     end
     def self.find_transactions_by_category()
-      sql="SELECT categories.name as category_name ,SUM( transactions.amount) as amount FROM transactions INNER JOIN categories ON transactions.category_id = categories.id GROUP BY categories.name"
+      sql="SELECT categories.name as category_name ,SUM( transactions.amount) as amount
+      FROM transactions
+      INNER JOIN categories
+      ON transactions.category_id = categories.id
+      GROUP BY categories.name"
       results = SqlRunner.run( sql)
       return results.map { |transaction| GroupByCategoryDto.new( transaction ) }
     end
+
+
     def self.find_transactions_by_category_name(name)
-      sql="SELECT categories.name AS category_name , merchants.name as merchant_name , transactions.amount , transactions.transaction_date  from transactions inner join merchants on transactions.merchant_id = merchants.id inner join categories on transactions.category_id =categories.id where categories.name = $1 order by transactions.transaction_date ;"
+      sql="SELECT categories.name AS category_name , merchants.name As merchant_name , transactions.amount , transactions.transaction_date
+      FROM transactions
+      INNER JOIN  merchants
+      ON transactions.merchant_id = merchants.id
+      INNER JOIN  categories
+      ON  transactions.category_id =categories.id
+      WHERE categories.name = $1
+      ORDER BY  transactions.transaction_date ;"
       values = [name]
       results = SqlRunner.run( sql,values )
       p result = results.map { |transaction| TransactionDto.new( transaction ) }
       return result
     end
     def self.find_transactions_by_merchant()
-      sql ="SELECT count (merchants.name) as frequency , merchants.name as merchant_name , SUM( transactions.amount) as amount  FROM transactions INNER JOIN merchants ON transactions.merchant_id = merchants.id GROUP BY  merchants.name"
+      sql ="SELECT count (merchants.name) AS frequency ,   merchants.name AS merchant_name ,
+      SUM( transactions.amount) AS amount
+       FROM transactions
+       INNER JOIN merchants ON transactions.merchant_id = merchants.id
+       GROUP BY  merchants.name"
       results=SqlRunner.run( sql)
       return results.map { |transaction| GroupByMerchantDto.new( transaction ) }
     end
     def self.find_transactions_by_merchant_name(name)
-      sql ="SELECT count (merchants.name) as frequency , merchants.name as merchant_name , SUM( transactions.amount) as amount  FROM transactions INNER JOIN merchants ON transactions.merchant_id = merchants.id where merchants.name = $1 GROUP BY  merchants.name"
+      sql ="SELECT count (merchants.name) AS frequency , merchants.name AS merchant_name , SUM( transactions.amount) AS amount
+      FROM transactions
+      INNER JOIN merchants
+      ON transactions.merchant_id = merchants.id
+      WHERE merchants.name = $1
+      GROUP BY  merchants.name"
       values = [name]
       results=SqlRunner.run( sql , values)
       result  = results.map { |transaction| GroupByMerchantDto.new( transaction ) }
@@ -127,7 +162,14 @@ class Transaction
     end
 
     def self.find_trasaction_wit_id_category_name(id,name)
-      sql ="SELECT  transactions.id, categories.name AS category_name , merchants.name as merchant_name , transactions.amount , transactions.transaction_date  from transactions inner join merchants on transactions.merchant_id = merchants.id inner join categories on transactions.category_id =categories.id where transactions.id = $1 And categories.name = $2 order by transactions.transaction_date "
+      sql ="SELECT  transactions.id, categories.name AS category_name , merchants.name AS merchant_name , transactions.amount , transactions.transaction_date
+      from transactions
+      INNER JOIN merchants
+      ON transactions.merchant_id = merchants.id
+      INNER JOIN categories
+      ON transactions.category_id =categories.id
+      WHERE transactions.id = $1 And categories.name = $2
+      ORDER BY transactions.transaction_date "
       values = [id,name]
       results=SqlRunner.run( sql , values)
       result  = results.map { |transaction| TransactionDto.new( transaction ) }
@@ -135,14 +177,18 @@ class Transaction
       return result
     end
     def self.check_tansaction_id(id)
-      sql ="select count (category_id) as category_count from transactions where category_id = $1;"
+      sql ="select count (category_id) AS category_count
+       FROM transactions
+       WHERE  category_id = $1;"
       values = [id]
       results=SqlRunner.run( sql , values)
       category_count = results.first()['category_count'].to_i
       return category_count
     end
     def self.check_tansaction_merchant_id(id)
-      sql ="select count (merchant_id) as merchant_count from transactions where merchant_id = $1;"
+      sql ="select count (merchant_id) AS merchant_count
+      FROM transactions
+      WHERE merchant_id = $1;"
       values = [id]
       results=SqlRunner.run( sql , values)
       merchant_count = results.first()['merchant_count'].to_i

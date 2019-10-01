@@ -1,0 +1,31 @@
+.header{
+  padding: 20px;
+  text-align: center;
+  color:#3A87B3;
+}
+body {
+  background-image: url('https://images.all-free-download.com/images/graphiclarge/abstract_blue_business_background_vector_illustration_570159.jpg');
+  background-size: 200%;
+  background-repeat: no-repeat;
+  color: blue;
+  font-family: 'Merriweather', serif;
+  padding-top:  0px;
+}
+.padding_home{
+text-align: right;
+padding-right: 15px;
+}
+.submit{
+  color: white;
+  background-color: green;
+}
+.delete{
+  color:white;
+  background-color: #EF3838;
+}
+h4{
+  color:#3A87B3;
+}
+h5{
+  color: #655858;
+}
